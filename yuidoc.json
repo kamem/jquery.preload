@@ -1,0 +1,7 @@
+{
+    "name": "jQuery preload",
+    "description": "preloadを実装するためのjQuery Plugin",
+    "options": {
+        "outdir": "yuidoc/"
+    }
+}

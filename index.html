@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" xmlns:mixi="http://mixi-platform.com/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="copyright" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/jquery.preload.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	var images = [
+		'http://farm8.staticflickr.com/7311/9932708814_8a0f05ab42_b.jpg?id=1',
+		'http://farm9.staticflickr.com/8296/8015581212_bf0550ed81_b.jpg?id=2',
+		'http://farm9.staticflickr.com/8306/8015588425_039556f183_b.jpg?id=3',
+		'http://farm7.staticflickr.com/6112/6269220997_58070748d9_b.jpg?id=4',
+		'http://farm9.staticflickr.com/8370/8379966395_6fbb1125c2_b.jpg?id=5',
+		'http://farm9.staticflickr.com/8227/8379969551_08e1733d31_b.jpg?id=6',
+		'http://farm4.staticflickr.com/3728/10381076235_9823124b31_b.jpg?id=7'
+	];
+
+	$(window).preload({
+		imgs : images,
+		onComplete : function(e){preloadComplate(e);},
+		
+		loadFunction : function(e){preload(e);},
+		timerSpeed : 10
+	});
+	
+	//画像が全て読み込み終わったら実行される関数
+	function preloadComplate(e) {
+		$('#load-text').html(e.percent + '%');
+		
+		console.log(e.img);
+		console.log('読み込んだ枚数 : ' + e.num);
+
+		$('body').append('<img src="' + e.img + '">');
+		console.log('onComplate');
+	}
+	
+	//%が増える度に実行される関数
+	function preload(e) {
+		$('#load-text').html(e.percent + '%');
+		if(e.img) {
+			console.log(e.aryNum + ' : ' + e.img);
+			console.log('読み込んだ枚数 : ' + e.num);
+			$('body').append('<img src="' + e.img + '">');
+		}
+	}
+});
+
+</script>
+<style>
+img {
+	width: 100%;
+}
+</style>
+<title>読み込んだ順番に配置（append）- プリローダーテスト</title>
+</head>
+<body>
+<h1>読み込んだ順番に配置（append）</h1>
+<p>Loading <span id="load-text">0%</span></p>
+</body>
+</html>
